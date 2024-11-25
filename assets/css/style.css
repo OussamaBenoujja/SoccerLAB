@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: poppins;
+    margin-left: 50px;
+    margin-right: 50px;
+    background-color: gray;
+    color: #DFF8EB;
+}
+
+nav{
+    background-color: #5C574F;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+    border-radius: 10px;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    gap: 10px;
+}
+
+.ToCont{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+
+.navRest{
+    display: flex;
+    gap: 30px;
+}
+
+.navRest a{
+    text-decoration: none;
+    color: #DFF8EB;
+}
+
+
+.playerCard{
+    background-color: #48483A;
+    width: 300px;
+
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    padding: 10px;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.4);
+}
+.playerCard img{
+    background-color: #5C574F;
+    border-radius: 50%;
+}
+#RAT {
+    position: absolute;
+    transform: translate(-500%,-650%);
+}
+.intopCard{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+}
+.intopCard img{
+    width: 20px;
+    height: 20px;
+}
+
+.midCard{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    justify-content: space-around;
+}
+
+#addPlayerBtn{
+    float: right !important;
+    background-color: #74776B;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    transition: ease-out 100ms;
+}
+.inmainPlayer{
+    width: 60%;
+}
+
+#addPlayerBtn:hover{
+    transform: scale(1.2);
+    transition: ease-in 100ms;
+}
+
+.ModalADD{
+    position: absolute !important;
+    background-color: #5C574F;
+    width: 500px;
+    height: 700px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    top: 20%;
+    left:50%;
+    
+}
