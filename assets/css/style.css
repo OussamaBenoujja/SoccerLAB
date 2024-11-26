@@ -6,7 +6,18 @@ body {
     margin-right: 50px;
     background-color: gray;
     color: #DFF8EB;
+    
 }
+
+/* .cursor-dot{
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    background-image: url('../img/ball.png');
+    background-repeat: no-repeat;
+    z-index: 99;
+} */
+
 
 nav{
     background-color: #5C574F;
@@ -58,6 +69,12 @@ main{
     border-radius: 30px;
     padding: 10px;
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.4);
+    transition: transform 1s ease;
+    transform-style: preserve-3d;
+}
+.playerCard:hover{
+    transform: rotateY(360deg); 
+    
 }
 .playerCard img{
     background-color: #5C574F;
@@ -119,3 +136,73 @@ main{
     left:50%;
     
 }
+
+#playerImg{
+    width: 100px;
+    height: 100px
+}
+
+/* Mid card hover buttons */
+.btn-update {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .btn-update:hover {
+    background-color: #555;
+  }
+
+  .btn-delete{
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  .btn-delete:hover {
+    background-color: #555;
+  }
+
+  #playertable{
+    
+    list-style-type: none;
+    margin: 5px;
+    padding: 5px;
+    background-color: rgb(143, 226, 143);
+    width: 300px;
+    height: 80vh;
+    overflow: auto;
+  }
+  .inPcard{
+    display: flex;
+    text-decoration: none;
+    gap: 15px;
+    align-items: center;
+    background-color: #74776B;
+    border-radius: 10px;
+    margin: 30px;
+    padding: 10px;
+  }
+
+  .inPcard img{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+
+  }
+
+  #Field{
+    width: 80%;
+  }
+
+  #buildMain{
+    display: flex !important;
+    flex-direction: row !important;
+  }

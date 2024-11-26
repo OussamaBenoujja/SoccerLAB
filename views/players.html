@@ -7,6 +7,7 @@
     <title>Players</title>
 </head>
 <body>
+    <!-- <div class="cursor-dot"></div> -->
     <nav>
         <a>LOGO</a>
         <div class="navRest">
@@ -30,7 +31,32 @@
         <label>Name</label>
         <input id="playerName" type="text">
         <label>Image</label>
-        <input id="playerImage"  type="file">
+        <input id="playerImage"  type="file" accept="image/png, image/jpeg">
+        <label for="playerPosition">Position</label>
+        <label for="playerPosition">Position</label>
+        <select id="playerPosition">
+            <optgroup label="Defenders">
+                <option value="gk">Goalkeeper (GK)</option>
+                <option value="cb">Center Back (CB)</option>
+                <option value="rb">Right Back (RB)</option>
+                <option value="lb">Left Back (LB)</option>
+                <option value="rwb">Right Wing Back (RWB)</option>
+                <option value="lwb">Left Wing Back (LWB)</option>
+            </optgroup>
+            <optgroup label="Midfielders">
+                <option value="cam">Central Attacking Midfielder (CAM)</option>
+                <option value="cm">Central Midfielder (CM)</option>
+                <option value="cdm">Central Defensive Midfielder (CDM)</option>
+                <option value="rm">Right Midfielder (RM)</option>
+                <option value="lm">Left Midfielder (LM)</option>
+            </optgroup>
+            <optgroup label="Attackers">
+                <option value="st">Striker (ST)</option>
+                <option value="cf">Center Forward (CF)</option>
+                <option value="rw">Right Winger (RW)</option>
+                <option value="lw">Left Winger (LW)</option>
+            </optgroup>
+        </select>
         <label>PAC</label>
         <input id="playerPac"  type="number">
         <label>SHO</label>
