@@ -52,16 +52,16 @@ async function test() {
             `;
             container.insertAdjacentElement('beforeend', newf);
 
-            // Delete Button Functionality
+            
             let deleteBtn = newf.querySelector('.btn-delete');
             deleteBtn.addEventListener('click', function () {
                 let playerList = JSON.parse(localStorage.getItem('players')) || [];
                 playerList = playerList.filter(player => player.id !== p.id);
                 localStorage.setItem('players', JSON.stringify(playerList));
-                newf.remove(); // Remove card from DOM
+                newf.remove();
             });
 
-            // Update Button Functionality
+            
             let updateBtn = newf.querySelector('.btn-update');
             updateBtn.addEventListener('click', function () {
                 modalAdd.style.display = 'flex';
