@@ -70,3 +70,25 @@
     display: flex;
     justify-content: center;
   }
+
+
+.form444 {
+    width: 200px;
+    height: 40px;
+    border-radius: 30px;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    font-weight: bold;
+    text-align: center;
+  }
+
+.rest444{
+  margin-top: 20px;
+  width: 200px;
+  height: 40px;
+  border-radius: 30px;
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}

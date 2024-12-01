@@ -59,8 +59,47 @@ async function test() {
                 modalAdd.querySelector('#playerDef').value = p.defending;
                 modalAdd.querySelector('#playerPhy').value = p.physical;
 
+                document.getElementById('closeModalADD').addEventListener('click', () => {
+                    document.querySelector('.ModalADD').style.display = 'none';
+                });
+                
+                function validatePlayerForm() {
+                    const name = document.getElementById('playerName').value.trim();
+                    const image = document.getElementById('playerImage').files[0];
+                    const position = document.getElementById('playerPosition').value;
+                    const pac = document.getElementById('playerPac').value;
+                    const sho = document.getElementById('playerSho').value;
+                    const pas = document.getElementById('playerPas').value;
+                    const dri = document.getElementById('playerDri').value;
+                    const def = document.getElementById('playerDef').value;
+                    const phy = document.getElementById('playerPhy').value;
+                    const country = document.getElementById('playerCountry').value;
+                
+                    let errors = [];
+                
+                    if (!name) errors.push("Name is required.");
+                    if (!image) errors.push("Image is required.");
+                    if (!position) errors.push("Position is required.");
+                    if (pac === "" || pac < 0 || pac > 100) errors.push("PAC must be between 0 and 100.");
+                    if (sho === "" || sho < 0 || sho > 100) errors.push("SHO must be between 0 and 100.");
+                    if (pas === "" || pas < 0 || pas > 100) errors.push("PAS must be between 0 and 100.");
+                    if (dri === "" || dri < 0 || dri > 100) errors.push("DRI must be between 0 and 100.");
+                    if (def === "" || def < 0 || def > 100) errors.push("DEF must be between 0 and 100.");
+                    if (phy === "" || phy < 0 || phy > 100) errors.push("PHY must be between 0 and 100.");
+                    if (!country) errors.push("Country is required.");
+                
+                    if (errors.length > 0) {
+                        alert(errors.join("\n"));
+                        return false;
+                    }
+                    
+                    return true; // Form is valid
+                }
                 
                 addPlayer.onclick = function () {
+                    e.preventDefault();
+                    if (validatePlayerForm()) {
+                        alert("Form submitted successfully!");
                     p.name = modalAdd.querySelector('#playerName').value;
                     p.position = modalAdd.querySelector('#playerPosition').value;
                     p.pace = modalAdd.querySelector('#playerPac').value;
@@ -77,6 +116,8 @@ async function test() {
                     localStorage.setItem('players', JSON.stringify(playerList));
                     window.location.reload();
                 };
+            }
+    
             });
             updateBtn.style.display = 'none';
             deleteBtn.style.display = 'none';
@@ -199,4 +240,7 @@ test();
 window.onload = function(){
     modalAdd.style.display = 'none';
 }
+
+
+
 
