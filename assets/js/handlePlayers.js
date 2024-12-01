@@ -5,7 +5,7 @@ let modalAdd = document.querySelector('.ModalADD');
 let modalBTN = document.querySelector('#addPlayerBtn');
 let modalClose = document.querySelector('#closeModalADD');
 let addPlayer = document.querySelector('#addPlayer');
-
+let updPlayer = document.querySelector('#updPlayer');
 async function test() {
     let players = JSON.parse(localStorage.getItem('players'));
     if (players) {
@@ -14,8 +14,12 @@ async function test() {
             newf.classList.add('playerCard');
             newf.setAttribute('id', `player-${p.id}`);
             newf.innerHTML = `
+                <div id='fixiated'>
                 <p id="RAT">${p.rating}</p>
+                <div id='span34'>
                 <img id='playerImg' src="${p.photo}">
+                </div>
+                </div>
                 <div class='intopCard'>
                     <p>${p.name}</p>
                     <img src="${p.flag}">
@@ -49,7 +53,11 @@ async function test() {
             
             let updateBtn = newf.querySelector('.btn-update');
             updateBtn.addEventListener('click', function () {
+                addPlayer.style.display = 'none';
+                updPlayer.style.display = 'block';
                 modalAdd.style.display = 'flex';
+            
+                
                 modalAdd.querySelector('#playerName').value = p.name;
                 modalAdd.querySelector('#playerPosition').value = p.position;
                 modalAdd.querySelector('#playerPac').value = p.pace;
@@ -58,66 +66,106 @@ async function test() {
                 modalAdd.querySelector('#playerDri').value = p.dribbling;
                 modalAdd.querySelector('#playerDef').value = p.defending;
                 modalAdd.querySelector('#playerPhy').value = p.physical;
-
-                document.getElementById('closeModalADD').addEventListener('click', () => {
-                    document.querySelector('.ModalADD').style.display = 'none';
-                });
+                modalAdd.querySelector('#playerImage').value = ''; 
+                modalAdd.querySelector('#playerCountry').value = p.nationality;
+            
                 
-                function validatePlayerForm() {
-                    const name = document.getElementById('playerName').value.trim();
-                    const image = document.getElementById('playerImage').files[0];
-                    const position = document.getElementById('playerPosition').value;
-                    const pac = document.getElementById('playerPac').value;
-                    const sho = document.getElementById('playerSho').value;
-                    const pas = document.getElementById('playerPas').value;
-                    const dri = document.getElementById('playerDri').value;
-                    const def = document.getElementById('playerDef').value;
-                    const phy = document.getElementById('playerPhy').value;
-                    const country = document.getElementById('playerCountry').value;
+                updPlayer.onclick = null;
+            
                 
-                    let errors = [];
-                
-                    if (!name) errors.push("Name is required.");
-                    if (!image) errors.push("Image is required.");
-                    if (!position) errors.push("Position is required.");
-                    if (pac === "" || pac < 0 || pac > 100) errors.push("PAC must be between 0 and 100.");
-                    if (sho === "" || sho < 0 || sho > 100) errors.push("SHO must be between 0 and 100.");
-                    if (pas === "" || pas < 0 || pas > 100) errors.push("PAS must be between 0 and 100.");
-                    if (dri === "" || dri < 0 || dri > 100) errors.push("DRI must be between 0 and 100.");
-                    if (def === "" || def < 0 || def > 100) errors.push("DEF must be between 0 and 100.");
-                    if (phy === "" || phy < 0 || phy > 100) errors.push("PHY must be between 0 and 100.");
-                    if (!country) errors.push("Country is required.");
-                
-                    if (errors.length > 0) {
-                        alert(errors.join("\n"));
-                        return false;
+                updPlayer.onclick = function () {
+                    const updatedName = modalAdd.querySelector('#playerName').value;
+                    const updatedPosition = modalAdd.querySelector('#playerPosition').value;
+                    const updatedPace = modalAdd.querySelector('#playerPac').value;
+                    const updatedShooting = modalAdd.querySelector('#playerSho').value;
+                    const updatedPassing = modalAdd.querySelector('#playerPas').value;
+                    const updatedDribbling = modalAdd.querySelector('#playerDri').value;
+                    const updatedDefending = modalAdd.querySelector('#playerDef').value;
+                    const updatedPhysical = modalAdd.querySelector('#playerPhy').value;
+                    const updatedCountry = modalAdd.querySelector('#playerCountry').value;
+                    const imageInput = modalAdd.querySelector('#playerImage'); 
+                    
+            
+                    
+                    if (
+                        updatedPace > 99 || updatedShooting > 99 || updatedPassing > 99 ||
+                        updatedDribbling > 99 || updatedDefending > 99 || updatedPhysical > 99 ||
+                        !updatedPace || !updatedShooting || !updatedPassing ||
+                        !updatedDribbling || !updatedDefending || !updatedPhysical
+                    ) {
+                        alert('Stat numbers cannot be empty or over 99!!!');
+                        return;
+                    }
+                    if (updatedName.length < 1 || updatedName.match(/\d+/)) {
+                        alert('Name cannot be empty or contain numbers');
+                        return;
+                    }
+                    if (updatedPosition === ' ') {
+                        alert('Pick a player position');
+                        return;
+                    }
+                    if (updatedCountry === ' ') {
+                        alert('Pick a player nationality');
+                        return;
+                    }
+                    if (imageInput.files && imageInput.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            const imgBase = e.target.result; 
+                            p.name = updatedName;
+                            p.photo = imgBase;
+                            p.position = updatedPosition;
+                            p.pace = updatedPace;
+                            p.shooting = updatedShooting;
+                            p.passing = updatedPassing;
+                            p.dribbling = updatedDribbling;
+                            p.defending = updatedDefending;
+                            p.physical = updatedPhysical;
+                            p.nationality = updatedCountry;
+                            p.flag = `https://cdn.sofifa.net/flags/${updatedCountry.toLowerCase()}.png`;
+                        }
+                        reader.readAsDataURL(imageInput.files[0]);
+                    }else{
+                        p.name = updatedName;
+                        p.position = updatedPosition;
+                        p.pace = updatedPace;
+                        p.shooting = updatedShooting;
+                        p.passing = updatedPassing;
+                        p.dribbling = updatedDribbling;
+                        p.defending = updatedDefending;
+                        p.physical = updatedPhysical;
+                        p.nationality = updatedCountry;
+                        p.flag = `https://cdn.sofifa.net/flags/${updatedCountry.toLowerCase()}.png`;
                     }
                     
-                    return true; // Form is valid
-                }
-                
-                addPlayer.onclick = function () {
-                    e.preventDefault();
-                    if (validatePlayerForm()) {
-                        alert("Form submitted successfully!");
-                    p.name = modalAdd.querySelector('#playerName').value;
-                    p.position = modalAdd.querySelector('#playerPosition').value;
-                    p.pace = modalAdd.querySelector('#playerPac').value;
-                    p.shooting = modalAdd.querySelector('#playerSho').value;
-                    p.passing = modalAdd.querySelector('#playerPas').value;
-                    p.dribbling = modalAdd.querySelector('#playerDri').value;
-                    p.defending = modalAdd.querySelector('#playerDef').value;
-                    p.physical = modalAdd.querySelector('#playerPhy').value;
-
                     
                     let playerList = JSON.parse(localStorage.getItem('players')) || [];
                     const index = playerList.findIndex(player => player.id === p.id);
-                    if (index > -1) playerList[index] = p;
+                    if (index > -1) {
+                        playerList[index] = p;
+                    }
                     localStorage.setItem('players', JSON.stringify(playerList));
-                    window.location.reload();
+            
+                    
+                    const playerCard = document.querySelector(`#player-${p.id}`);
+                    playerCard.querySelector('#RAT').textContent = p.rating;
+                    playerCard.querySelector('#playerImg').src = p.photo;
+                    playerCard.querySelector('.intopCard').innerHTML = `
+                        <p>${p.name}</p>
+                        <img src="${p.flag}">
+                        <p>${p.position}</p>
+                    `;
+                    playerCard.querySelector('.midCard').innerHTML = `
+                        <p>${p.pace} PAC</p>
+                        <p>${p.shooting} SHO</p>
+                        <p>${p.passing} PAS</p>
+                        <p>${p.dribbling} DRI</p>
+                        <p>${p.defending} DEF</p>
+                        <p>${p.physical} PHY</p>
+                    `;
+
+                    modalAdd.style.display = 'none';
                 };
-            }
-    
             });
             updateBtn.style.display = 'none';
             deleteBtn.style.display = 'none';
@@ -128,6 +176,8 @@ async function test() {
 
 modalBTN.addEventListener('click',function(){
     modalAdd.style.display = 'flex';
+    addPlayer.style.display = 'block';
+    updPlayer.style.display = 'none';
 })
 
 modalClose.addEventListener('click',function(){
@@ -136,8 +186,9 @@ modalClose.addEventListener('click',function(){
 
 
 addPlayer.addEventListener('click', function () {
+
     let name = modalAdd.querySelector('#playerName').value;
-    let imageInput = modalAdd.querySelector('#playerImage'); // File input
+    let imageInput = modalAdd.querySelector('#playerImage'); 
     let playerPos = modalAdd.querySelector('#playerPosition').value;
     let pac = modalAdd.querySelector('#playerPac').value;
     let sho = modalAdd.querySelector('#playerSho').value;
@@ -146,6 +197,23 @@ addPlayer.addEventListener('click', function () {
     let def = modalAdd.querySelector('#playerDef').value;
     let phy = modalAdd.querySelector('#playerPhy').value;
     let country = modalAdd.querySelector('#playerCountry').value;
+
+    if(pac>99||sho>99||pas>99||dri>99||def>99||phy>99||pac===''||sho===''||pas===''||dri===''||def===''||phy===''){
+        alert('Stat numbers can not be empty or over 99!!!');
+        return;
+    }
+    if(name.length<1||name.match(/\d+/)){
+        alert('name can not be empty or contain numbers');
+        return;
+    }
+    if(playerPos===' '){
+        alert('pick a player position');
+        return;
+    }
+    if(country===' '){
+        alert('pick a player nationality');
+        return;
+    }
 
     let spot;
     if(playerPos==="gk"||playerPos==="cb"||playerPos==="rb"||playerPos==="lb"||playerPos==="rwb"||playerPos==="lwb"){
@@ -157,12 +225,10 @@ addPlayer.addEventListener('click', function () {
         spot = 'att';
     }
 
-
     let rat = parseInt((parseInt(pac)+parseInt(sho)+parseInt(pas)+parseInt(dri)+parseInt(def)+parseInt(phy))/6);
 
     let playerList = JSON.parse(localStorage.getItem('players')) || [];
 
-    // Check if a file was selected
     if (imageInput.files && imageInput.files[0]) {
         const reader = new FileReader();
 
@@ -240,7 +306,6 @@ test();
 window.onload = function(){
     modalAdd.style.display = 'none';
 }
-
 
 
 

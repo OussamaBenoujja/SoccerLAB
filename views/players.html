@@ -7,17 +7,14 @@
     <title>Players</title>
 </head>
 <body>
-
-    <video autoplay muted loop id="myVideo">
-        <source src="../assets/img/bgVid.mp4" type="video/mp4">
-      </video>
     
     <nav>
-        <a>LOGO</a>
+        <a id="logo">
+            <img src="../assets/img/logo.png" >
+        </a>
         <div class="navRest">
             <a href="build.html">Builder</a>
             <a href="players.html">Players</a>
-            <a href="formations.html">Formations</a>
         </div>
     </nav>
     <main>
@@ -33,11 +30,12 @@
     <div class="ModalADD">
         <button id="closeModalADD">Close</button>
         <label>Name</label>
-        <input id="playerName" type="text">
+        <input id="playerName" type="text" required>
         <label>Image</label>
         <input id="playerImage"  type="file" accept="image/png, image/jpeg">
         <label for="playerPosition">Position</label>
-        <select id="playerPosition">
+        <select id="playerPosition" required>
+            <option value=" ">Pick Player Position</option>
             <optgroup label="Defenders">
                 <option value="gk">Goalkeeper (GK)</option>
                 <option value="cb">Center Back (CB)</option>
@@ -61,20 +59,20 @@
             </optgroup>
         </select>
         <label>PAC</label>
-        <input id="playerPac"  type="number">
+        <input id="playerPac"  type="number" required>
         <label>SHO</label>
-        <input id="playerSho"  type="number">
+        <input id="playerSho"  type="number" required>
         <label>PAS</label>
-        <input id="playerPas"  type="number">
+        <input id="playerPas"  type="number" required>
         <label>DRI</label>
-        <input id="playerDri"  type="number">
+        <input id="playerDri"  type="number" required>
         <label>DEF</label>
-        <input id="playerDef"  type="number">
+        <input id="playerDef"  type="number" required>
         <label>PHY</label>
-        <input id="playerPhy"  type="number">
+        <input id="playerPhy"  type="number" required>
 
-        <select class="form-select" autocomplete="country" id="playerCountry" name="country">
-                <option value="">country</option>
+        <select class="form-select" autocomplete="country" id="playerCountry" name="country" required>
+                <option value=" ">country</option>
                 <option value="AF">Afghanistan</option>
                 <option value="AX">Åland Islands</option>
                 <option value="AL">Albania</option>
@@ -328,7 +326,8 @@
                 <option value="ZW">Zimbabwe</option>
         </select>
             
-        <button id="addPlayer">SUBMIT</button>
+        <button id="addPlayer" type="submit">SUBMIT</button>
+        <button id="updPlayer" type="submit">SUBMIT</button>
 
     </div>
 

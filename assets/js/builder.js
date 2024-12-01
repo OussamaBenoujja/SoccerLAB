@@ -686,3 +686,20 @@ document.body.addEventListener('mousemove',function(){
     })
 
 })
+
+
+window.addEventListener('resize', function() {
+    let mn = document.getElementById('buildMain');
+    let lf = document.querySelector('.leftSide');
+    let rf = document.querySelector('.formSide');
+    if(window.innerWidth < 850) {
+        lf.style.display = 'none';
+
+        mn.style.display = 'flex'
+        mn.style.flexDirection = 'column';
+
+    } else {
+        lf.style.display = ''; 
+         
+    }
+});
