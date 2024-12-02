@@ -52,121 +52,119 @@ async function test() {
 
             
             let updateBtn = newf.querySelector('.btn-update');
-            updateBtn.addEventListener('click', function () {
-                addPlayer.style.display = 'none';
-                updPlayer.style.display = 'block';
-                modalAdd.style.display = 'flex';
-            
-                
-                modalAdd.querySelector('#playerName').value = p.name;
-                modalAdd.querySelector('#playerPosition').value = p.position;
-                modalAdd.querySelector('#playerPac').value = p.pace;
-                modalAdd.querySelector('#playerSho').value = p.shooting;
-                modalAdd.querySelector('#playerPas').value = p.passing;
-                modalAdd.querySelector('#playerDri').value = p.dribbling;
-                modalAdd.querySelector('#playerDef').value = p.defending;
-                modalAdd.querySelector('#playerPhy').value = p.physical;
-                modalAdd.querySelector('#playerImage').value = ''; 
-                modalAdd.querySelector('#playerCountry').value = p.nationality;
-            
-                
-                updPlayer.onclick = null;
-            
-                
-                updPlayer.onclick = function () {
-                    const updatedName = modalAdd.querySelector('#playerName').value;
-                    const updatedPosition = modalAdd.querySelector('#playerPosition').value;
-                    const updatedPace = modalAdd.querySelector('#playerPac').value;
-                    const updatedShooting = modalAdd.querySelector('#playerSho').value;
-                    const updatedPassing = modalAdd.querySelector('#playerPas').value;
-                    const updatedDribbling = modalAdd.querySelector('#playerDri').value;
-                    const updatedDefending = modalAdd.querySelector('#playerDef').value;
-                    const updatedPhysical = modalAdd.querySelector('#playerPhy').value;
-                    const updatedCountry = modalAdd.querySelector('#playerCountry').value;
-                    const imageInput = modalAdd.querySelector('#playerImage'); 
-                    
-            
-                    
-                    if (
-                        updatedPace > 99 || updatedShooting > 99 || updatedPassing > 99 ||
-                        updatedDribbling > 99 || updatedDefending > 99 || updatedPhysical > 99 ||
-                        !updatedPace || !updatedShooting || !updatedPassing ||
-                        !updatedDribbling || !updatedDefending || !updatedPhysical
-                    ) {
-                        alert('Stat numbers cannot be empty or over 99!!!');
-                        return;
-                    }
-                    if (updatedName.length < 1 || updatedName.match(/\d+/)) {
-                        alert('Name cannot be empty or contain numbers');
-                        return;
-                    }
-                    if (updatedPosition === ' ') {
-                        alert('Pick a player position');
-                        return;
-                    }
-                    if (updatedCountry === ' ') {
-                        alert('Pick a player nationality');
-                        return;
-                    }
-                    if (imageInput.files && imageInput.files[0]) {
-                        const reader = new FileReader();
-                        reader.onload = function (e) {
-                            const imgBase = e.target.result; 
-                            p.name = updatedName;
-                            p.photo = imgBase;
-                            p.position = updatedPosition;
-                            p.pace = updatedPace;
-                            p.shooting = updatedShooting;
-                            p.passing = updatedPassing;
-                            p.dribbling = updatedDribbling;
-                            p.defending = updatedDefending;
-                            p.physical = updatedPhysical;
-                            p.nationality = updatedCountry;
-                            p.flag = `https://cdn.sofifa.net/flags/${updatedCountry.toLowerCase()}.png`;
-                        }
-                        reader.readAsDataURL(imageInput.files[0]);
-                    }else{
-                        p.name = updatedName;
-                        p.position = updatedPosition;
-                        p.pace = updatedPace;
-                        p.shooting = updatedShooting;
-                        p.passing = updatedPassing;
-                        p.dribbling = updatedDribbling;
-                        p.defending = updatedDefending;
-                        p.physical = updatedPhysical;
-                        p.nationality = updatedCountry;
-                        p.flag = `https://cdn.sofifa.net/flags/${updatedCountry.toLowerCase()}.png`;
-                    }
-                    
-                    
-                    let playerList = JSON.parse(localStorage.getItem('players')) || [];
-                    const index = playerList.findIndex(player => player.id === p.id);
-                    if (index > -1) {
-                        playerList[index] = p;
-                    }
-                    localStorage.setItem('players', JSON.stringify(playerList));
-            
-                    
-                    const playerCard = document.querySelector(`#player-${p.id}`);
-                    playerCard.querySelector('#RAT').textContent = p.rating;
-                    playerCard.querySelector('#playerImg').src = p.photo;
-                    playerCard.querySelector('.intopCard').innerHTML = `
-                        <p>${p.name}</p>
-                        <img src="${p.flag}">
-                        <p>${p.position}</p>
-                    `;
-                    playerCard.querySelector('.midCard').innerHTML = `
-                        <p>${p.pace} PAC</p>
-                        <p>${p.shooting} SHO</p>
-                        <p>${p.passing} PAS</p>
-                        <p>${p.dribbling} DRI</p>
-                        <p>${p.defending} DEF</p>
-                        <p>${p.physical} PHY</p>
-                    `;
+updateBtn.addEventListener('click', function () {
+    addPlayer.style.display = 'none';
+    updPlayer.style.display = 'block';
+    modalAdd.style.display = 'flex';
 
-                    modalAdd.style.display = 'none';
-                };
-            });
+   
+    modalAdd.querySelector('#playerName').value = p.name;
+    modalAdd.querySelector('#playerPosition').value = p.position;
+    modalAdd.querySelector('#playerPac').value = p.pace;
+    modalAdd.querySelector('#playerSho').value = p.shooting;
+    modalAdd.querySelector('#playerPas').value = p.passing;
+    modalAdd.querySelector('#playerDri').value = p.dribbling;
+    modalAdd.querySelector('#playerDef').value = p.defending;
+    modalAdd.querySelector('#playerPhy').value = p.physical;
+    modalAdd.querySelector('#playerCountry').value = p.nationality;
+
+    
+    updPlayer.onclick = function () {
+        const updatedName = modalAdd.querySelector('#playerName').value;
+        const updatedPosition = modalAdd.querySelector('#playerPosition').value;
+        const updatedPace = modalAdd.querySelector('#playerPac').value;
+        const updatedShooting = modalAdd.querySelector('#playerSho').value;
+        const updatedPassing = modalAdd.querySelector('#playerPas').value;
+        const updatedDribbling = modalAdd.querySelector('#playerDri').value;
+        const updatedDefending = modalAdd.querySelector('#playerDef').value;
+        const updatedPhysical = modalAdd.querySelector('#playerPhy').value;
+        const updatedCountry = modalAdd.querySelector('#playerCountry').value;
+        const imageInput = modalAdd.querySelector('#playerImage');
+
+        
+        if (
+            updatedPace > 99 || updatedShooting > 99 || updatedPassing > 99 ||
+            updatedDribbling > 99 || updatedDefending > 99 || updatedPhysical > 99 ||
+            !updatedPace || !updatedShooting || !updatedPassing ||
+            !updatedDribbling || !updatedDefending || !updatedPhysical
+        ) {
+            alert('Stat numbers cannot be empty or over 99!!!');
+            return;
+        }
+        if (updatedName.length < 1 || updatedName.match(/\d+/)) {
+            alert('Name cannot be empty or contain numbers');
+            return;
+        }
+        if (!updatedPosition.trim()) {
+            alert('Pick a player position');
+            return;
+        }
+        if (!updatedCountry.trim()) {
+            alert('Pick a player nationality');
+            return;
+        }
+
+        
+        if (imageInput.files && imageInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                p.name = updatedName;
+                p.photo = e.target.result; 
+                p.position = updatedPosition;
+                p.pace = updatedPace;
+                p.shooting = updatedShooting;
+                p.passing = updatedPassing;
+                p.dribbling = updatedDribbling;
+                p.defending = updatedDefending;
+                p.physical = updatedPhysical;
+                p.nationality = updatedCountry;
+                p.flag = `https://cdn.sofifa.net/flags/${updatedCountry.toLowerCase()}.png`;
+
+                savePlayerData(p);
+            }
+            reader.readAsDataURL(imageInput.files[0]);
+        } else {
+            p.name = updatedName;
+            p.position = updatedPosition;
+            p.pace = updatedPace;
+            p.shooting = updatedShooting;
+            p.passing = updatedPassing;
+            p.dribbling = updatedDribbling;
+            p.defending = updatedDefending;
+            p.physical = updatedPhysical;
+            p.nationality = updatedCountry;
+            p.flag = `https://cdn.sofifa.net/flags/${updatedCountry.toLowerCase()}.png`;
+
+            savePlayerData(p);
+        }
+        modalAdd.style.display = 'none';
+    };
+});
+
+            function savePlayerData(updatedPlayer) {
+                let playerList = JSON.parse(localStorage.getItem('players')) || [];
+                const index = playerList.findIndex(player => player.id === updatedPlayer.id);
+                if (index > -1) {
+                    playerList[index] = updatedPlayer; 
+                }
+                localStorage.setItem('players', JSON.stringify(playerList)); 
+                const playerCard = document.querySelector(`#player-${updatedPlayer.id}`);
+                playerCard.querySelector('#RAT').textContent = updatedPlayer.rating;
+                playerCard.querySelector('#playerImg').src = updatedPlayer.photo;
+                playerCard.querySelector('.intopCard').innerHTML = `
+                    <p>${updatedPlayer.name}</p>
+                    <img src="${updatedPlayer.flag}">
+                    <p>${updatedPlayer.position}</p>
+                `;
+                playerCard.querySelector('.midCard').innerHTML = `
+                    <p>${updatedPlayer.pace} PAC</p>
+                    <p>${updatedPlayer.shooting} SHO</p>
+                    <p>${updatedPlayer.passing} PAS</p>
+                    <p>${updatedPlayer.dribbling} DRI</p>
+                    <p>${updatedPlayer.defending} DEF</p>
+                    <p>${updatedPlayer.physical} PHY</p>
+                `;
+            }
             updateBtn.style.display = 'none';
             deleteBtn.style.display = 'none';
         });
