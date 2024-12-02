@@ -626,3 +626,13 @@ main{
 }
 
 
+.navRest a{
+  background-color: rgba(0,0,0,0.5);
+  padding: 10px;
+  border-radius: 30px;
+}
+
+.navRest a:hover{
+  background-color: rgba(255,0,0,0.5);
+
+}
